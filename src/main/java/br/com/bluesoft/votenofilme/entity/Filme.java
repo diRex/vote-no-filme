@@ -17,8 +17,14 @@ public class Filme implements Serializable {
 	
 	private String nome;
 	
-	private Long pontuacao;
-
+	private String image;
+	
+	private Long totalVotos;
+	
+	public void incrementarVotosEm(Integer quantidade) {
+		this.totalVotos += quantidade;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -35,11 +41,19 @@ public class Filme implements Serializable {
 		this.nome = nome;
 	}
 
-	public Long getPontuacao() {
-		return pontuacao;
+	public String getImage() {
+		return image;
 	}
 
-	public void setPontuacao(Long pontuacao) {
-		this.pontuacao = pontuacao;
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Long getTotalVotos() {
+		return totalVotos;
+	}
+
+	public void setTotalVotos(Long totalVotos) {
+		this.totalVotos = totalVotos;
 	}
 }

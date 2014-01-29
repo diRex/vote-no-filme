@@ -19,8 +19,22 @@ public interface FilmeRepository {
 	
 	/**
 	 * Obtém todos os filmes
+	 * @param orderBy(opcional) - campo usado para ordenação 
 	 * @return lista de filmes
 	 */
 	public List<Filme> listFilmes();
+
+	/**
+	 * Obtém um filme pelo ID
+	 * @param filmeId - ID do filme
+	 * @return filme
+	 */
+	public Filme findById(Long filmeId);
+	
+	/**
+	 * Obtém o ranking dos filmes
+	 * @return lista de filmes ordenados por total de votos
+	 */
+	public List<Filme> listRankingFilmes();
 	
 }
