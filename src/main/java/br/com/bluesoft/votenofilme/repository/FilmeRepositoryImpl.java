@@ -57,7 +57,7 @@ public class FilmeRepositoryImpl implements FilmeRepository {
 		
 		Root<Filme> root = criteria.from(Filme.class);
 		
-		criteria.select(root).orderBy(builder.asc(root.get("voto")));
+		criteria.select(root).orderBy(builder.asc(root.get("totalVotos")));
 		
 		return em.createQuery(criteria).getResultList();
 	}
