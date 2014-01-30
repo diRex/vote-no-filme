@@ -75,6 +75,17 @@
         	<groupId>junit</groupId>
         	<artifactId>junit</artifactId>
         	<version>4.11</version>
+        	<scope>test</scope>
+        </dependency>
+        <dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<version>2.4.9</version>
+		</dependency>
+        <dependency>
+        	<groupId>com.github.springtestdbunit</groupId>
+        	<artifactId>spring-test-dbunit</artifactId>
+        	<version>1.0.1</version>
         </dependency>
     </dependencies>
 

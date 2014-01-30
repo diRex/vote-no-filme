@@ -5,16 +5,18 @@ import javax.persistence.PersistenceContext;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/applicationContext-test.xml" })
-@TransactionConfiguration(defaultRollback = true)
-@Transactional
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
 public class AbstractRepositoryTest {
 	
 	@PersistenceContext
 	EntityManager em;
+	
 }

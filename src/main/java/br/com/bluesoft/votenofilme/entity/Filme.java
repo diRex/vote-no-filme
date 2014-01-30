@@ -17,7 +17,7 @@ public class Filme implements Serializable {
 	
 	private String nome;
 	
-	private String image;
+	private String imagemUrl;
 	
 	private Long totalVotos;
 	
@@ -41,12 +41,12 @@ public class Filme implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getImage() {
-		return image;
+	public String getImagemUrl() {
+		return imagemUrl;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImagemUrl(String imagemUrl) {
+		this.imagemUrl = imagemUrl;
 	}
 
 	public Long getTotalVotos() {
