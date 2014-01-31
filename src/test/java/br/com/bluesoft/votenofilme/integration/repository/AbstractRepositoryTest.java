@@ -13,10 +13,10 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/applicationContext-test.xml" })
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class})
-public class AbstractRepositoryTest {
-	
-	@PersistenceContext
-	EntityManager em;
-	
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DbUnitTestExecutionListener.class })
+public abstract class AbstractRepositoryTest {
+    
+    @PersistenceContext
+    EntityManager em;
+    
 }

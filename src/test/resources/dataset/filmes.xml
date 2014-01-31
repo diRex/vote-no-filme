@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<filme
-		id="1"
-		nome="Harry Potter e a Pedra Filosofal"
-        imagemUrl="harry_potter.jpg"
-		totalVotos="2"></filme>
+    <filme
+        id="1"
+        nome="Harry Potter e a Pedra Filosofal"
+        imagem_url="harry_potter.jpg"
+        total_votos="2"></filme>
 
-	<filme
-		id="2"
-		nome="Senhor dos Aneis - O Retorno do Rei"
-        imagemUrl="senhor_dos_aneis.jpg"
-		totalVotos="3"></filme>
+    <filme
+        id="2"
+        nome="Senhor dos Aneis - O Retorno do Rei"
+        imagem_url="senhor_dos_aneis.jpg"
+        total_votos="3"></filme>
 
-	<filme
-		id="3"
-		nome="O Poderoso Chefão"
-        imagemUrl="o_poderoso_chefao.jpg"
-		totalVotos="5"></filme>
+    <filme
+        id="3"
+        nome="O Poderoso Chefão"
+        imagem_url="o_poderoso_chefao.jpg"
+        total_votos="5"></filme>
 
-	<filme
-		id="4"
-		nome="ToyStore"
-        imagemUrl="toy_store.jpg"
-		totalVotos="1"></filme>
+    <filme
+        id="4"
+        nome="ToyStore"
+        imagem_url="toy_store.jpg"
+        total_votos="1"></filme>
 
-	<filme
-		id="5"
-		nome="Matrix"
-        imagemUrl="matrix.jpg"
-		totalVotos="4"></filme>
+    <filme
+        id="5"
+        nome="Matrix"
+        imagem_url="matrix.jpg"
+        total_votos="4"></filme>
 </dataset>
