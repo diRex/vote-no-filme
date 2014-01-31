@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.bluesoft.votenofilme.entity.Filme;
 import br.com.bluesoft.votenofilme.repository.FilmeRepository;
@@ -17,8 +18,8 @@ public class FilmeServiceImpl implements FilmeService {
     
     
     @Override
-    public void votar(Long filmeId) {
-        Filme filme = this.filmeRepository.findById(filmeId);
+    @Transactional
+    public void votarEm(Filme filme) {
         filme.incrementarVotosEm(1);
         this.filmeRepository.saveOrUpate(filme);
     }

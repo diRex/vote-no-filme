@@ -11,7 +11,7 @@ public interface FilmeService {
      * 
      * @param filmeId - id do filme que irá receber o voto
      */
-    void votar(Long filmeId);
+    void votarEm(Filme filme);
     
     
     /**
