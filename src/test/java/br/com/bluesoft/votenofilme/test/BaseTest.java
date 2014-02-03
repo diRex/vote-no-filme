@@ -1,4 +1,4 @@
-package br.com.bluesoft.votenofilme.integration;
+package br.com.bluesoft.votenofilme.test;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,6 +14,6 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 @ContextConfiguration(locations = { "classpath:/applicationContext-test.xml" })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class, DbUnitTestExecutionListener.class })
-public abstract class AbstractIntegrationTest {
+public abstract class BaseTest {
     
 }

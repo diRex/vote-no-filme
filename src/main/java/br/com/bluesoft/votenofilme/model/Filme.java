@@ -1,4 +1,4 @@
-package br.com.bluesoft.votenofilme.entity;
+package br.com.bluesoft.votenofilme.model;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "FILME")
 public class Filme implements Serializable {
     
-    private static final long serialVersionUID = 7139577710335943106L;
+    private static final long serialVersionUID = 3779873935310307323L;
     
     @Id
     @GeneratedValue
@@ -81,4 +81,5 @@ public class Filme implements Serializable {
         
         this.totalVotos = totalVotos;
     }
+    
 }
