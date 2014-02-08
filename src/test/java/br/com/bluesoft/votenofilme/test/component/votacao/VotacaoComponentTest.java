@@ -3,6 +3,7 @@ package br.com.bluesoft.votenofilme.test.component.votacao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,19 +25,27 @@ public class VotacaoComponentTest extends BaseTest {
     private final Opcao poderosoChefao = new Opcao(3L, "Poderoso Chefão");
     private final Opcao toyStore = new Opcao(4L, "ToyStore");
     private final Opcao matrix = new Opcao(5L, "Matrix");
+    List<Opcao> opcoes;
     
     
     @Before
     public void setup() {
         
-        List<Opcao> opcoesDisponiveis = new ArrayList<Opcao>();
-        opcoesDisponiveis.add(this.harryPotter);
-        opcoesDisponiveis.add(this.senhorDosAneis);
-        opcoesDisponiveis.add(this.poderosoChefao);
-        opcoesDisponiveis.add(this.toyStore);
-        opcoesDisponiveis.add(this.matrix);
+        this.opcoes = new ArrayList<Opcao>();
         
-        this.votacaoComponent.setOpcoesDisponiveis(opcoesDisponiveis);
+        this.opcoes.add(this.harryPotter);
+        this.opcoes.add(this.senhorDosAneis);
+        this.opcoes.add(this.poderosoChefao);
+        this.opcoes.add(this.toyStore);
+        this.opcoes.add(this.matrix);
+        
+        this.votacaoComponent.setOpcoes(this.opcoes);
+    }
+    
+    
+    @After
+    public void teardown() {
+        this.votacaoComponent.setOpcoes(new ArrayList<Opcao>());
     }
     
     
@@ -57,11 +66,10 @@ public class VotacaoComponentTest extends BaseTest {
     
     @Test(expected = NoMoreComparisonsException.class)
     public void should_throws_no_more_comparison_exception() {
-        this.harryPotter.setComparadoCom(this.senhorDosAneis);
-        this.harryPotter.setComparadoCom(this.poderosoChefao);
-        this.harryPotter.setComparadoCom(this.toyStore);
-        this.harryPotter.setComparadoCom(this.matrix);
-        this.votacaoComponent.getNovaComparacaoCom(this.harryPotter);
+        
+        for (int i = 0; i < this.opcoes.size(); i++) {
+            this.votacaoComponent.getNovaComparacaoCom(this.harryPotter);
+        }
     }
     
     
@@ -75,8 +83,6 @@ public class VotacaoComponentTest extends BaseTest {
         Assert.assertNotNull(comparacao.getOpcao1());
         Assert.assertNotNull(comparacao.getOpcao2());
         Assert.assertNotEquals(comparacao.getOpcao1(), comparacao.getOpcao2());
-        // Assert.assertFalse(comparacao.getOpcao1().getComparados().contains(comparacao.getOpcao2()));
-        // Assert.assertFalse(comparacao.getOpcao2().getComparados().contains(comparacao.getOpcao1()));
         
     }
     

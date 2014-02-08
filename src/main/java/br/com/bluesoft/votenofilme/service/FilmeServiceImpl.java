@@ -17,6 +17,9 @@ import br.com.bluesoft.votenofilme.component.votacao.VotacaoComponentImpl.Compar
 import br.com.bluesoft.votenofilme.component.votacao.model.Opcao;
 import br.com.bluesoft.votenofilme.model.Filme;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+
 @Service
 @Transactional
 public class FilmeServiceImpl implements FilmeService {
@@ -26,6 +29,23 @@ public class FilmeServiceImpl implements FilmeService {
     
     @Autowired
     private VotacaoComponent votacaoComponent;
+    
+    
+    @Override
+    public void loadOpcoes() {
+        
+        List<Filme> filmes = this.listRankingFilmes();
+        
+        List<Opcao> opcoes = Lists.transform(filmes, new Function<Filme, Opcao>() {
+            
+            @Override
+            public Opcao apply(Filme filme) {
+                return null;
+            }
+        });
+        
+        this.votacaoComponent.setOpcoes(opcoes);
+    }
     
     
     @Override
@@ -63,7 +83,8 @@ public class FilmeServiceImpl implements FilmeService {
     
     
     @Override
-    public Comparacao obterComparacaoCom(final Filme filme) {
+    public Comparacao obterComparacaoCom(final Long filmeId) {
+        Filme filme = this.findById(filmeId);
         return this.votacaoComponent.getNovaComparacaoCom(new Opcao(filme.getId(), filme.getNome()));
     }
     

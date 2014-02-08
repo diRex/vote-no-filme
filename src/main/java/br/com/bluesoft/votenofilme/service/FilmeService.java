@@ -8,6 +8,12 @@ import br.com.bluesoft.votenofilme.model.Filme;
 public interface FilmeService {
     
     /**
+     * Carrega as opçoes a serem votadas.
+     */
+    void loadOpcoes();
+    
+    
+    /**
      * Incrementa um voto para o filme
      * 
      * @param filmeId - id do filme que irá receber o voto
@@ -26,10 +32,10 @@ public interface FilmeService {
     /**
      * Obtém uma nova comparacao entre o filme votado na comparação anterior e outro filme que ainda não foi comparado
      * 
-     * @param filme - filme votado na comparação anterior
+     * @param filmeId - id do filme votado na comparação anterior
      * @return comparacao
      */
-    Comparacao obterComparacaoCom(Filme filme);
+    Comparacao obterComparacaoCom(Long filmeId);
     
     
     /**

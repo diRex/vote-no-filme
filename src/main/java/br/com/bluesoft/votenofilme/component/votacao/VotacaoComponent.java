@@ -32,5 +32,5 @@ public interface VotacaoComponent {
      * 
      * @param opcoes - opçoes disponiveis
      */
-    void setOpcoesDisponiveis(List<Opcao> opcoes);
+    void setOpcoes(List<Opcao> opcoes);
 }

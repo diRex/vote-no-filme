@@ -15,16 +15,15 @@ import com.google.common.collect.Lists;
 @Component
 public class VotacaoComponentImpl implements VotacaoComponent {
     
-    private List<Opcao> opcoesDisponiveis = new ArrayList<Opcao>();
+    private List<Opcao> opcoes = new ArrayList<Opcao>();
     
     
     @Override
     public Comparacao getNovaComparacao() throws NoMoreComparisonsException {
-        if (!this.hasOpcoesDisponiveis()) {
+        if (!this.hasOpcoes()) {
             throw new NoMoreComparisonsException();
         }
-        
-        Opcao opcao1 = this.getRandomOpcao(this.opcoesDisponiveis);
+        Opcao opcao1 = this.getRandomOpcao(this.opcoes);
         
         return this.getNovaComparacaoCom(opcao1);
     }
@@ -36,32 +35,32 @@ public class VotacaoComponentImpl implements VotacaoComponent {
         List<Opcao> opcoesDisponiveis = this.getOpcoesDisponiveis(opcao1);
         
         if (opcoesDisponiveis.isEmpty()) {
-            this.opcoesDisponiveis.remove(opcao1);
+            this.opcoes.remove(opcao1);
             throw new NoMoreComparisonsException();
         }
         
         Opcao opcao2 = this.getRandomOpcao(opcoesDisponiveis);
         Comparacao comparacao = new Comparacao(opcao1, opcao2);
         
-        this.filtrarOpcoesDisponiveis(opcao1, opcao2);
+        this.filtrarOpcoesComparadas(opcao1, opcao2);
         
         return comparacao;
     }
     
     
     @Override
-    public void setOpcoesDisponiveis(List<Opcao> opcoes) {
-        this.opcoesDisponiveis.addAll(opcoes);
+    public void setOpcoes(List<Opcao> opcoes) {
+        this.opcoes.addAll(opcoes);
     }
     
     
     /**
-     * Verifica se ainda existem opções disponiveis para fazer uma comparacao
+     * Verifica se ainda existem opções para fazer uma comparacao
      * 
-     * @return true quando houver opções disponiveis
+     * @return true quando houver opções
      */
-    private boolean hasOpcoesDisponiveis() {
-        return this.opcoesDisponiveis.size() >= 2;
+    private boolean hasOpcoes() {
+        return this.opcoes.size() >= 2;
     }
     
     
@@ -73,7 +72,7 @@ public class VotacaoComponentImpl implements VotacaoComponent {
     private Opcao getRandomOpcao(List<Opcao> opcoesDisponiveis) {
         int max = opcoesDisponiveis.size();
         int index = (int) (Math.random() * max);
-        return this.opcoesDisponiveis.get(index);
+        return opcoesDisponiveis.get(index);
     }
     
     
@@ -82,10 +81,10 @@ public class VotacaoComponentImpl implements VotacaoComponent {
      * 
      * @param opcoes
      */
-    private void filtrarOpcoesDisponiveis(final Opcao... opcoes) {
+    private void filtrarOpcoesComparadas(final Opcao... opcoes) {
         for (Opcao opcao : opcoes) {
             if (this.getOpcoesDisponiveis(opcao).isEmpty()) {
-                this.opcoesDisponiveis.remove(opcao);
+                this.opcoes.remove(opcao);
             }
         }
     }
@@ -98,14 +97,13 @@ public class VotacaoComponentImpl implements VotacaoComponent {
      * @return lista de opções disponiveis
      */
     private List<Opcao> getOpcoesDisponiveis(final Opcao opcao) {
-        List<Opcao> opcoesDisponiveis = Lists.newArrayList(Collections2.filter(this.opcoesDisponiveis,
-                new Predicate<Opcao>() {
-                    
-                    @Override
-                    public boolean apply(Opcao op) {
-                        return (!opcao.getComparados().contains(op));
-                    }
-                }));
+        List<Opcao> opcoesDisponiveis = Lists.newArrayList(Collections2.filter(this.opcoes, new Predicate<Opcao>() {
+            
+            @Override
+            public boolean apply(Opcao op) {
+                return (!opcao.getComparados().contains(op) && !opcao.equals(op));
+            }
+        }));
         return opcoesDisponiveis;
     }
     

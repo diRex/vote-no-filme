@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="votenofilme">
 <head>
     <meta charset="utf-8">
     <title>Vote no Filme</title>
@@ -21,10 +21,26 @@
 </head>
 <body>
 
+    <h1>Vote No Filme</h1>
+    <div id="votacao" ng-controller="votacaoController">
+
+        <ul>
+            <li ng-repeat="filme in ranking">{{ filme.nome }}
+            <button class="btn btn-error" ng-click="votar(filme.id)">votar</button>
+            </li>
+
+        </ul>
+        <button class="btn btn-default" ng-click="listranking()">listar ranking</button>
+
+    </div>
 
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
+    <script src="/assets/components/angular/angular.min.js"></script>
+    <script src="/assets/components/angular-resource/angular-resource.min.js"></script>
+    <script src="/assets/scripts/main.js"></script>
+    <script src="/assets/scripts/controllers/votacao-controller.js"></script>
 </body>
 </html>

@@ -1,0 +1,11 @@
+{
+  "name": "votenofilme",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.0.3",
+    "modernizr": "~2.6.2",
+    "angular":"~1.2.11",
+    "angular-resource":"~1.2.11"
+  },
+  "devDependencies": {}
+}
