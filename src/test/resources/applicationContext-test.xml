@@ -15,5 +15,14 @@
     <context:component-scan base-package="br.com.bluesoft.votenofilme" />
     <import resource="spring-persistence.xml"/>
     
+    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+    <property name="scopes">
+        <map>
+            <entry key="session">
+                <bean class="org.springframework.context.support.SimpleThreadScope"/>
+            </entry>
+        </map>
+    </property>
+	</bean>
     
 </beans>

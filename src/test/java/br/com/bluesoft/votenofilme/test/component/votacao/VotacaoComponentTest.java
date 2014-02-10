@@ -17,7 +17,7 @@ import br.com.bluesoft.votenofilme.test.BaseTest;
 public class VotacaoComponentTest extends BaseTest {
     
     @Autowired
-    private VotacaoComponent votacaoComponent;
+    private VotacaoComponent<Filme> votacaoComponent;
     private List<Filme> filmes;
     
     
@@ -34,7 +34,6 @@ public class VotacaoComponentTest extends BaseTest {
     
     
     @Test
-    @SuppressWarnings("unchecked")
     public void should_generate_new_comparison() {
         Filme filme = this.filmes.get(0);
         Map<Integer, Filme> comparacao = (Map<Integer, Filme>) this.votacaoComponent.getNovaComparacaoCom(filme,

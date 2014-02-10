@@ -26,7 +26,7 @@ public class VotacaoController {
     private FilmeService filmeService;
     
     @Autowired
-    private VotacaoComponent votacaoComponent;
+    private VotacaoComponent<Filme> votacaoComponent;
     
     
     @ResponseBody
@@ -44,7 +44,6 @@ public class VotacaoController {
     
     @ResponseBody
     @RequestMapping(value = "/obter_comparacao", method = RequestMethod.POST)
-    @SuppressWarnings("unchecked")
     public Map<Integer, Filme> obterComparacao(HttpServletRequest request) {
         
         List<Filme> filmes = this.getSessionFilmes(request);

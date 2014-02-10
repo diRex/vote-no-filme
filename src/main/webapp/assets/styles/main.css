@@ -1,0 +1,9 @@
+.comparacao img {
+	cursor: pointer;
+}
+
+.center {
+     float: none;
+     margin-left: auto;
+     margin-right: auto;
+}
