@@ -1,4 +1,4 @@
-package br.com.bluesoft.votenofilme.service;
+package br.com.bluesoft.votenofilme.repository;
 
 import java.util.List;
 
@@ -8,39 +8,23 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
-import br.com.bluesoft.votenofilme.component.votacao.VotacaoComponent;
 import br.com.bluesoft.votenofilme.model.Filme;
 
-@Service
-@Transactional
-public class FilmeServiceImpl implements FilmeService {
+@Repository
+public class FilmeRepositoryImpl implements FilmeRepository {
     
     @PersistenceContext
     private EntityManager em;
-    
-    @Autowired
-    private VotacaoComponent votacaoComponent;
-    
-    
-    @Override
-    public void votarEm(final Filme filme) {
-        filme.incrementarVotosEm(1);
-        this.em.merge(filme);
-    }
-    
     
     @Override
     public Filme findById(final long filmeId) {
         return this.em.find(Filme.class, filmeId);
     }
     
-    
     @Override
-    public List<Filme> listRankingFilmes() {
+    public List<Filme> listFilmesOrderByVotos() {
         CriteriaBuilder builder = this.em.getCriteriaBuilder();
         
         CriteriaQuery<Filme> criteria = builder.createQuery(Filme.class);
@@ -51,5 +35,9 @@ public class FilmeServiceImpl implements FilmeService {
         
         return this.em.createQuery(criteria).getResultList();
     }
-    
+
+    @Override
+    public Filme saveOrUpdate(Filme filme) {
+        return this.em.merge(filme);
+    }
 }

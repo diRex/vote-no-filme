@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.bluesoft.votenofilme.component.votacao.VotacaoComponent;
+import br.com.bluesoft.votenofilme.component.votacao.VotacaoComponentImpl;
 import br.com.bluesoft.votenofilme.component.votacao.exception.NoMoreComparisonsException;
 import br.com.bluesoft.votenofilme.model.Filme;
 import br.com.bluesoft.votenofilme.test.BaseTest;
@@ -30,18 +31,19 @@ public class VotacaoComponentTest extends BaseTest {
         this.filmes.add(new Filme(3L, "O Senhor dos Anéis - O Retorno do Rei", "senhor_dos_aneis_03.jpg", 0L));
         this.filmes.add(new Filme(4L, "Toy Story", "toy_story_01.jpg", 0L));
         this.filmes.add(new Filme(5L, "Iron Man 3", "iron_man_03.jpg", 0L));
+        
+        this.votacaoComponent.setOpcoes(filmes);
     }
     
     
     @Test
     public void should_generate_new_comparison() {
         Filme filme = this.filmes.get(0);
-        Map<Integer, Filme> comparacao = (Map<Integer, Filme>) this.votacaoComponent.getNovaComparacaoCom(filme,
-                this.filmes);
+        Map<Integer, Filme> comparacao = (Map<Integer, Filme>) this.votacaoComponent.getNovaComparacaoCom(filme);
         
         Assert.assertNotNull(comparacao);
         Assert.assertTrue(comparacao.entrySet().size() == 2);
-        Assert.assertNotEquals(comparacao.get(VotacaoComponent.OPCAO_1), comparacao.get(VotacaoComponent.OPCAO_2));
+        Assert.assertNotEquals(comparacao.get(VotacaoComponentImpl.OPCAO_1), comparacao.get(VotacaoComponentImpl.OPCAO_2));
     }
     
     
@@ -49,7 +51,7 @@ public class VotacaoComponentTest extends BaseTest {
     public void should_throws_no_more_comparison_exception() {
         Filme filme = this.filmes.get(1);
         for (int i = 0; i < this.filmes.size(); i++) {
-            this.votacaoComponent.getNovaComparacaoCom(filme, this.filmes);
+            this.votacaoComponent.getNovaComparacaoCom(filme);
         }
     }
     
