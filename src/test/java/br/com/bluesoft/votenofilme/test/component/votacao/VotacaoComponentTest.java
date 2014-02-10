@@ -2,88 +2,56 @@ package br.com.bluesoft.votenofilme.test.component.votacao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.bluesoft.votenofilme.component.votacao.VotacaoComponent;
-import br.com.bluesoft.votenofilme.component.votacao.VotacaoComponentImpl.Comparacao;
 import br.com.bluesoft.votenofilme.component.votacao.exception.NoMoreComparisonsException;
-import br.com.bluesoft.votenofilme.component.votacao.model.Opcao;
+import br.com.bluesoft.votenofilme.model.Filme;
 import br.com.bluesoft.votenofilme.test.BaseTest;
 
 public class VotacaoComponentTest extends BaseTest {
     
     @Autowired
     private VotacaoComponent votacaoComponent;
-    
-    private final Opcao harryPotter = new Opcao(1L, "Harry Potter e a Pedra Filosofal");;
-    private final Opcao senhorDosAneis = new Opcao(2L, "O Senhor do Aneis - O Retorno do Rei");;
-    private final Opcao poderosoChefao = new Opcao(3L, "Poderoso Chefão");
-    private final Opcao toyStore = new Opcao(4L, "ToyStore");
-    private final Opcao matrix = new Opcao(5L, "Matrix");
-    List<Opcao> opcoes;
+    private List<Filme> filmes;
     
     
     @Before
     public void setup() {
+        this.filmes = new ArrayList<Filme>();
         
-        this.opcoes = new ArrayList<Opcao>();
-        
-        this.opcoes.add(this.harryPotter);
-        this.opcoes.add(this.senhorDosAneis);
-        this.opcoes.add(this.poderosoChefao);
-        this.opcoes.add(this.toyStore);
-        this.opcoes.add(this.matrix);
-        
-        this.votacaoComponent.setOpcoes(this.opcoes);
-    }
-    
-    
-    @After
-    public void teardown() {
-        this.votacaoComponent.setOpcoes(new ArrayList<Opcao>());
+        this.filmes.add(new Filme(1L, "Harry Potter e a Pedra Filosofal", "harry_potter_01.jpg", 0L));
+        this.filmes.add(new Filme(2L, "O Poderoso Chefão", "poderoso_chefao.jpg", 0L));
+        this.filmes.add(new Filme(3L, "O Senhor dos Anéis - O Retorno do Rei", "senhor_dos_aneis_03.jpg", 0L));
+        this.filmes.add(new Filme(4L, "Toy Story", "toy_story_01.jpg", 0L));
+        this.filmes.add(new Filme(5L, "Iron Man 3", "iron_man_03.jpg", 0L));
     }
     
     
     @Test
+    @SuppressWarnings("unchecked")
     public void should_generate_new_comparison() {
-        Comparacao comparacao = this.votacaoComponent.getNovaComparacao();
-        this.assertComparison(comparacao);
-    }
-    
-    
-    @Test
-    public void should_generate_new_comparison_with_a_defined_option() {
-        Comparacao comparacao = this.votacaoComponent.getNovaComparacaoCom(this.senhorDosAneis);
-        this.assertComparison(comparacao);
-        Assert.assertEquals(this.senhorDosAneis, comparacao.getOpcao1());
+        Filme filme = this.filmes.get(0);
+        Map<Integer, Filme> comparacao = (Map<Integer, Filme>) this.votacaoComponent.getNovaComparacaoCom(filme,
+                this.filmes);
+        
+        Assert.assertNotNull(comparacao);
+        Assert.assertTrue(comparacao.entrySet().size() == 2);
+        Assert.assertNotEquals(comparacao.get(VotacaoComponent.OPCAO_1), comparacao.get(VotacaoComponent.OPCAO_2));
     }
     
     
     @Test(expected = NoMoreComparisonsException.class)
     public void should_throws_no_more_comparison_exception() {
-        
-        for (int i = 0; i < this.opcoes.size(); i++) {
-            this.votacaoComponent.getNovaComparacaoCom(this.harryPotter);
+        Filme filme = this.filmes.get(1);
+        for (int i = 0; i < this.filmes.size(); i++) {
+            this.votacaoComponent.getNovaComparacaoCom(filme, this.filmes);
         }
-    }
-    
-    
-    /**
-     * Assert default para comparação
-     * 
-     * @param comparacao
-     */
-    private void assertComparison(Comparacao comparacao) {
-        Assert.assertNotNull(comparacao);
-        Assert.assertNotNull(comparacao.getOpcao1());
-        Assert.assertNotNull(comparacao.getOpcao2());
-        Assert.assertNotEquals(comparacao.getOpcao1(), comparacao.getOpcao2());
-        
     }
     
 }

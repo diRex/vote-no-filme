@@ -23,7 +23,8 @@ public class FilmesServiceTest extends BaseTest {
     @Test
     @ExpectedDatabase("/dataset/filme1_votado.xml")
     public void should_increment_a_vote_to_movie() {
-        this.filmeService.votarEm(1L);
+        Filme filme = this.filmeService.findById(1L);
+        this.filmeService.votarEm(filme);
     }
     
     
@@ -41,8 +42,4 @@ public class FilmesServiceTest extends BaseTest {
         }
     }
     
-    
-    public void should_get_next_filme_to_compare() {
-        
-    }
 }
