@@ -1,0 +1,11 @@
+<h1 class="text-center">
+    Vote no seu favorito
+</h1>
+
+<div class="row">
+    <div class="col-md-6" ng-repeat="opcao in comparacao">
+        <a  ng-click="votar(opcao, $event)">
+            <img class="img-responsive" src="/assets/images/{{opcao.imagemUrl}}" title="{{opcao.nome}}" alt="{{opcao.nome}}" />
+        </a>
+    </div>
+</div>
