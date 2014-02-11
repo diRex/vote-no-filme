@@ -33,9 +33,10 @@ voteApp.factory('VotacaoService', function($http) {
             });
     }
 
-    var obterComparacao = function(callback) {
+    var obterComparacao = function(filme, callback) {
         var callback = callback;
-        $http({method: 'POST', url: votacao_path+'/obter_comparacao'}).
+        var data = (filme) ? JSON.stringify(filme) : {};
+        $http({method: 'POST', data:data, url: votacao_path+'/obter_comparacao'}).
             success(function (data, status, headers, config) {
                 if (callback && callback.success) callback.success(data)
             }).
@@ -91,23 +92,28 @@ voteApp.controller('HomeCtrl', function($scope, $location, VotacaoService) {
 
 });
 
-voteApp.controller('VotacaoCtrl', function($scope, VotacaoService) {
+voteApp.controller('VotacaoCtrl', function($scope, $location, VotacaoService) {
 
     $scope.votar = function(opcao) {
         VotacaoService.votar(opcao, {
-            success: obterComparacao
+            success: function() {
+                obterComparacao(opcao);
+            }
         });
     }
 
-    function obterComparacao() {
-        VotacaoService.obterComparacao({
+    function obterComparacao(opcao) {
+        VotacaoService.obterComparacao(opcao,{
             success: function(data) {
                 $scope.comparacao = data;
+            },
+            error: function() {
+                $location.path("/ranking");
             }
         })
     };
 
-    obterComparacao();
+    obterComparacao(null);
 });
 
 

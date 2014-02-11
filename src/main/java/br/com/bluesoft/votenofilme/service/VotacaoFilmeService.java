@@ -22,21 +22,23 @@ public interface VotacaoFilmeService {
      */
     List<Filme> listRankingFilmes();
     
+    
     /**
      * Carrega as opcoes de filmes para votar
      */
     void loadOpcoesFilmes();
-
-
+    
+    
     /**
      * Obtem nova comparacao com filme parametrizado
+     * 
      * @param filme
      * 
      * @return map com indece da opcao e filme
      */
     Map<Integer, Filme> getNovaComparacaoCom(Filme filme);
-
-
+    
+    
     /**
      * Obtem nova comparacao entre dois filmes aleatorios
      * 

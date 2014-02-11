@@ -24,34 +24,31 @@ public class VotacaoFilmeController {
     @ResponseBody
     @RequestMapping(value = "/load_filmes", method = RequestMethod.POST)
     public void loadFilmes() {
-        this.votacaoFilmeService.loadOpcoesFilmes();
+        votacaoFilmeService.loadOpcoesFilmes();
     }
+    
     
     @ResponseBody
     @RequestMapping(value = "/obter_comparacao", method = RequestMethod.POST)
-    public Map<Integer, Filme> obterComparacao() {
-        return (Map<Integer, Filme>) this.votacaoFilmeService.getNovaComparacao();
-    }
-    
-    
-    @ResponseBody
-    @RequestMapping(value = "/comparar", method = RequestMethod.POST)
-    public void obterComparacaoCom(@RequestBody Filme filme) {
-        this.votacaoFilmeService.getNovaComparacaoCom(filme);
+    public Map<Integer, Filme> obterComparacao(@RequestBody Filme filme) {
+        if (filme == null || filme.getId() == null) {
+            return votacaoFilmeService.getNovaComparacao();
+        }
+        return votacaoFilmeService.getNovaComparacaoCom(filme);
     }
     
     
     @ResponseBody
     @RequestMapping(value = "/votar", method = RequestMethod.POST)
     public void votar(@RequestBody Filme filme) {
-        this.votacaoFilmeService.votarEm(filme);
+        votacaoFilmeService.votarEm(filme);
     }
     
     
     @ResponseBody
     @RequestMapping(value = "/ranking", method = RequestMethod.GET)
     public List<Filme> listarRanking() {
-        return this.votacaoFilmeService.listRankingFilmes();
+        return votacaoFilmeService.listRankingFilmes();
     }
     
 }

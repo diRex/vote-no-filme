@@ -11,22 +11,12 @@ import br.com.bluesoft.votenofilme.repository.FilmeRepository;
 import br.com.bluesoft.votenofilme.test.BaseTest;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.ExpectedDatabase;
 
 @DatabaseSetup("/dataset/filmes.xml")
 public class FilmesRepositoryTest extends BaseTest {
     
     @Autowired
     private FilmeRepository filmeRepository;
-    
-    
-    @Test
-    @ExpectedDatabase("/dataset/filme1_votado.xml")
-    public void should_update_movie() {
-        Filme filme = this.filmeRepository.findById(1L);
-        filme.setTotalVotos(3L);
-        this.filmeRepository.saveOrUpdate(filme);
-    }
     
     
     @Test

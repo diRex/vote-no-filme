@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.bluesoft.votenofilme.component.votacao.VotacaoComponent;
+import br.com.bluesoft.votenofilme.component.votacao.exception.NoMoreComparisonsException;
 import br.com.bluesoft.votenofilme.model.Filme;
 import br.com.bluesoft.votenofilme.repository.FilmeRepository;
 
@@ -27,26 +28,37 @@ public class VotacaoFilmeServiceImpl implements VotacaoFilmeService {
         filme.incrementarVotosEm(1);
         this.filmeRepository.saveOrUpdate(filme);
     }
-
+    
+    
     @Override
     public List<Filme> listRankingFilmes() {
         return this.filmeRepository.listFilmesOrderByVotos();
     }
-
+    
+    
     @Override
     public void loadOpcoesFilmes() {
         List<Filme> filmes = this.filmeRepository.listFilmesOrderByVotos();
         this.votacaoComponent.setOpcoes(filmes);
     }
-
+    
+    
     @Override
     public Map<Integer, Filme> getNovaComparacaoCom(Filme filme) {
-        return this.votacaoComponent.getNovaComparacaoCom(filme);
+        Map<Integer, Filme> comparacao = null;
+        
+        try {
+            comparacao = this.votacaoComponent.getNovaComparacaoCom(filme);
+        } catch (NoMoreComparisonsException e) {
+            comparacao = this.votacaoComponent.getNovaComparacao();
+        }
+        return comparacao;
         
     }
-
+    
+    
     @Override
     public Map<Integer, Filme> getNovaComparacao() {
-        return this.votacaoComponent.getNovaComparacaoCom();
+        return this.votacaoComponent.getNovaComparacao();
     }
 }

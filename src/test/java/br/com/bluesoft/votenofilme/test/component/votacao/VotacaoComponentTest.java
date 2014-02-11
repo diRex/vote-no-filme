@@ -15,6 +15,9 @@ import br.com.bluesoft.votenofilme.component.votacao.exception.NoMoreComparisons
 import br.com.bluesoft.votenofilme.model.Filme;
 import br.com.bluesoft.votenofilme.test.BaseTest;
 
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+
+@DatabaseSetup("/dataset/filmes.xml")
 public class VotacaoComponentTest extends BaseTest {
     
     @Autowired
@@ -32,18 +35,19 @@ public class VotacaoComponentTest extends BaseTest {
         this.filmes.add(new Filme(4L, "Toy Story", "toy_story_01.jpg", 0L));
         this.filmes.add(new Filme(5L, "Iron Man 3", "iron_man_03.jpg", 0L));
         
-        this.votacaoComponent.setOpcoes(filmes);
+        this.votacaoComponent.setOpcoes(this.filmes);
     }
     
     
     @Test
     public void should_generate_new_comparison() {
         Filme filme = this.filmes.get(0);
-        Map<Integer, Filme> comparacao = (Map<Integer, Filme>) this.votacaoComponent.getNovaComparacaoCom(filme);
+        Map<Integer, Filme> comparacao = this.votacaoComponent.getNovaComparacaoCom(filme);
         
         Assert.assertNotNull(comparacao);
         Assert.assertTrue(comparacao.entrySet().size() == 2);
-        Assert.assertNotEquals(comparacao.get(VotacaoComponentImpl.OPCAO_1), comparacao.get(VotacaoComponentImpl.OPCAO_2));
+        Assert.assertNotEquals(comparacao.get(VotacaoComponentImpl.OPCAO_1),
+                comparacao.get(VotacaoComponentImpl.OPCAO_2));
     }
     
     

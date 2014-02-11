@@ -40,7 +40,8 @@
             </property>
         </bean>
     </beans>
-
+	
+	
     <beans profile="prod">
         <bean class="java.net.URI" id="dbUrl">
             <constructor-arg value="#{systemEnvironment['DATABASE_URL']}"/>
