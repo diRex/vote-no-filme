@@ -7,11 +7,6 @@ import br.com.bluesoft.votenofilme.component.votacao.exception.NoMoreComparisons
 
 public interface VotacaoComponent<E extends Opcao> {
     
-    public static final int OPCAO_1 = 1;
-    
-    public static final int OPCAO_2 = 2;
-    
-    
     /**
      * Obtem nova comparacao para uma opcao
      * 
@@ -19,7 +14,7 @@ public interface VotacaoComponent<E extends Opcao> {
      * @return map com indece da opcao e opcao
      * @throws NoMoreComparisonsException
      */
-    public Map<Integer, E> getNovaComparacaoCom(final E opcao1) throws NoMoreComparisonsException;
+    Map<Integer, E> getNovaComparacaoCom(final E opcao1);
     
     
     /**
@@ -28,7 +23,7 @@ public interface VotacaoComponent<E extends Opcao> {
      * @return map com indece da opcao e opcao
      * @throws NoMoreComparisonsException
      */
-    public Map<Integer, E> getNovaComparacao() throws NoMoreComparisonsException;
+    Map<Integer, E> getNovaComparacao();
     
     
     /**
@@ -36,6 +31,6 @@ public interface VotacaoComponent<E extends Opcao> {
      * 
      * @param opcoes
      */
-    public void setOpcoes(List<E> opcoes);
+    void setOpcoes(List<E> opcoes);
     
 }

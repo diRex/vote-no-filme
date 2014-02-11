@@ -19,12 +19,15 @@ import com.google.common.collect.Lists;
 @Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
 public class VotacaoComponentImpl<E extends Opcao> implements VotacaoComponent<E> {
     
+    public static final int OPCAO_1 = 1;
+    public static final int OPCAO_2 = 2;
+    
     private Map<E, List<E>> opcaoComparacoes = new HashMap<E, List<E>>();
     private List<E> opcoes = new ArrayList<E>();
     
     
     @Override
-    public Map<Integer, E> getNovaComparacaoCom(final E opcao1) throws NoMoreComparisonsException {
+    public Map<Integer, E> getNovaComparacaoCom(final E opcao1) {
         
         if (this.opcoes.isEmpty()) {
             throw new NoMoreComparisonsException();
@@ -43,7 +46,7 @@ public class VotacaoComponentImpl<E extends Opcao> implements VotacaoComponent<E
     
     
     @Override
-    public Map<Integer, E> getNovaComparacao() throws NoMoreComparisonsException {
+    public Map<Integer, E> getNovaComparacao() {
         if (!this.hasOpcoesDisponiveis()) {
             throw new NoMoreComparisonsException();
         }

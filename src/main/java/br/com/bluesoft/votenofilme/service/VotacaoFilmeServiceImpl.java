@@ -26,20 +26,20 @@ public class VotacaoFilmeServiceImpl implements VotacaoFilmeService {
     @Override
     public void votarEm(final Filme filme) {
         filme.incrementarVotosEm(1);
-        this.filmeRepository.saveOrUpdate(filme);
+        filmeRepository.saveOrUpdate(filme);
     }
     
     
     @Override
     public List<Filme> listRankingFilmes() {
-        return this.filmeRepository.listFilmesOrderByVotos();
+        return filmeRepository.listFilmesOrderByVotos();
     }
     
     
     @Override
     public void loadOpcoesFilmes() {
-        List<Filme> filmes = this.filmeRepository.listFilmesOrderByVotos();
-        this.votacaoComponent.setOpcoes(filmes);
+        List<Filme> filmes = filmeRepository.listFilmesOrderByVotos();
+        votacaoComponent.setOpcoes(filmes);
     }
     
     
@@ -48,9 +48,9 @@ public class VotacaoFilmeServiceImpl implements VotacaoFilmeService {
         Map<Integer, Filme> comparacao = null;
         
         try {
-            comparacao = this.votacaoComponent.getNovaComparacaoCom(filme);
+            comparacao = votacaoComponent.getNovaComparacaoCom(filme);
         } catch (NoMoreComparisonsException e) {
-            comparacao = this.votacaoComponent.getNovaComparacao();
+            comparacao = votacaoComponent.getNovaComparacao();
         }
         return comparacao;
         
@@ -59,6 +59,6 @@ public class VotacaoFilmeServiceImpl implements VotacaoFilmeService {
     
     @Override
     public Map<Integer, Filme> getNovaComparacao() {
-        return this.votacaoComponent.getNovaComparacao();
+        return votacaoComponent.getNovaComparacao();
     }
 }
