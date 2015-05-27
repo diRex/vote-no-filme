@@ -1,4 +1,4 @@
-# Vonte no Filme 
+# Vonte no Filme [![Build Status](https://travis-ci.org/dvbeato/vote-no-filme.svg?branch=master)](https://travis-ci.org/dvbeato/vote-no-filme)
 
 Aplicativo Web para rankear os filmes de acordo com a votação dos usuários.
 
